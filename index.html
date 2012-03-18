@@ -34,85 +34,138 @@
 
 
 	<div id="mission" class="step " data-x="1000" data-y="200" data-scale="3" > 
-	  
-	  Our applications are becomming more and more <div class="skewing">distibuted</div> <br/> 
-        We need to track analyse and react to <div class="rotating"> events </div>.<br/> 
 
-	   Current ssh and tail doesn't<div class="scaling">&nbsp; &nbsp; scale!</div> 
+	  Our applications are becomming more and more <div class="skewing">distibuted</div> <br/> 
+	  We need to track analyse and react to <div class="rotating"> events </div>.<br/> 
+
+	  Current ssh and tail doesn't<div class="scaling">&nbsp; &nbsp; scale!</div> 
 	</div>
 
 	<div id="graylog full" class="step full" data-x="1200" data-y="1200" data-scale="2">  
-	     <img src="img/graylog-architecture.png" /> 
+	  <img src="img/graylog-architecture.png" /> 
 	</div>
 
-     <div id="graylog-messages" class="step" data-x="2000" data-y="1200" data-scale="1" data-rotate-y="90">  
-	   <img width="1300" height="816"  src="img/messages.png" /> 
+	<div id="graylog-messages" class="step" data-x="2000" data-y="1200" data-scale="1" data-rotate-y="90">  
+	  <img width="1300" height="816"  src="img/messages.png" /> 
 	</div>
 
-     <div id="streams" class="step" data-x="2600" data-y="1200" data-scale="1" data-rotate-x="90">  
-	   <img width="1300" height="816"  src="img/streams.png" /> 
+	<div id="streams" class="step" data-x="2600" data-y="1200" data-scale="1" data-rotate-x="90">  
+	  <img width="1300" height="816"  src="img/streams.png" /> 
 	</div>
 
-	<div id="forwarding" class="step" data-x="2600" data-y="1200" data-scale="1" data-rotate-x="90">  
-	    <img width="1300" height="816"  src="img/forwarding.png" /> 
+	<div id="forwarding" class="step" data-x="2600" data-y="1500" data-scale="1" data-rotate-x="170">  
+	  <img width="1300" height="816"  src="img/forwarding.png" /> 
+	</div>
+
+	<div id="gelfino" class="step " data-x="-1500" data-y="200" data-scale="3" > 
+
+	  Gelfino a <div class="shrinking">micro</div> GELF server, users define <div class="rotating"> streams </div> which are composed of selectors and actions taken upon selected events.
+	</div>
+
+
+	<div id="code GELF" class="step" data-x="-1500" data-y="400" data-z="-1400"> 
+	   <pre class="brush: javascript;">
+{
+  "version": "1.0",
+  "host": "www1",
+  "short_message": "Short message",
+  "full_message": "Long text.....",
+  "timestamp": 1291899928,
+  "level": 1,
+  "facility": "gelf-enterprise",
+  "file": "Foo.java",
+  "line": 356,
+  "_user_id": 42,
+  "_something_else": "foo"
+}
+		</pre>
+	</div>
+
+
+     <div id="code defstream" class="step" data-x="-1500" data-y="700" data-z="-1200"> 
+	 <pre class="brush: clojure;">
+(defstream stream-name 
+  "Selectors can be a string regex or fn"
+  :message-key selector ...   action) 
+	 </pre>
+	</div>
+
+     <div id="code examples" class="step" data-x="-1500" data-y="900" data-z="-1000"> 
+       <pre class="brush: clojure;">
+(defstream unicorns
+   :short_message #".*unicorn.*" 
+   (fnordic-even "seen-unicorn"))
+
+(defstream info-logs
+  :level (fn [v] (= "INFO" v)) 
+  :facility "gelf-enterprise"
+  (email message))
+	 </pre>
+     </div>
+
+
+    <div id="code drools-stream" class="step" data-x="-1500" data-y="1100" data-z="-800"> 
+       <pre class="brush: clojure;">
+(defstream unicorns :drools "unicorns.drl")
+	 </pre>
+     </div>
+
+  <div id="code drools-rules" class="step" data-x="-1500" data-y="1300" data-z="-600"> 
+	 <pre class="brush: drools;">
+    rule "unicorn seen"
+    when 
+        e: String(this matches ".*unicorn.*")
+    then
+       System.out.println("unicorn seen");   
+    end 
+    </pre>
+  </div>
+
+     <div id="summary" class="step title" data-x="4800" data-y="4800" data-rotate="0" data-scale="2"> 
+	 <b>Summary</b>
+     </div>
+
+
+     <div id="links" class="step" data-x="4800" data-y="5200" data-rotate="0" data-scale="1" > 
+	 <h1>Resources</h1>
+	 <a href="https://github.com/narkisr/gelfino">gelfino</a>
+	 <a href="http://graylog2.com/">graylog2</a>
+	 <a href="http://logstash.net/">logstash</a>
+     </div>
+
+     <div id="resource" class="step" data-x="4800" data-y="5500" data-rotate="0" data-scale="1" > 
+	 <div class="content bullets" ref="summary/01-about/2" style="margin-top: 128.5px; ">
+	   <h1>Find me online</h1>
+
+	   <a href="http://il.linkedin.com/in/narkisr" >linkedin</a> 
+	   <a href="http://twitter.com/#!/narkisr/">@narkisr</a><br>
+	   <a href="https://github.com/narkisr">github</a> 
+	   <a href="http://narkisr.com">narkisr.com</a>
+
 	 </div>
+     </div>
 
+     <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+     </div> 
 
-
-	<div id="mission" class="step " data-x="1000" data-y="200" data-scale="3" > 
-	  
-	  Gelfino a tiny <div class="skewing">distibuted</div> <br/> 
-        We need to track analyse and react to <div class="rotating"> events </div>.<br/> 
-
-	   Current ssh and tail doesn't<div class="scaling">&nbsp; &nbsp; scale!</div> 
-	</div>
-
-
-	<!--Summary-->
-	<div id="summary" class="step title" data-x="4800" data-y="4800" data-rotate="0" data-scale="2"> 
-	  <b>Summary</b>
-	</div>
-
-
-	<div id="links" class="step" data-x="4800" data-y="5200" data-rotate="0" data-scale="1" > 
-	  <h1>Resources</h1>
-	  <a href="https://github.com/narkisr/gelfino">gelfino</a>
-	  <a href="http://graylog2.com/">graylog2</a>
-	  <a href="http://logstash.net/">logstash</a>
-	</div>
-
-	<div id="resource" class="step" data-x="4800" data-y="5500" data-rotate="0" data-scale="1" > 
-	  <div class="content bullets" ref="summary/01-about/2" style="margin-top: 128.5px; ">
-	    <h1>Find me online</h1>
-
-	    <a href="http://il.linkedin.com/in/narkisr" >linkedin</a> 
-	    <a href="http://twitter.com/#!/narkisr/">@narkisr</a><br>
-	    <a href="https://github.com/narkisr">github</a> 
-	    <a href="http://narkisr.com">narkisr.com</a>
-
-	  </div>
-	</div>
-
-	<div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
-	</div> 
-
-    </div>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/kerning.js"></script>
-    <script src="js/impress.js"></script>
-    <script>impress();</script>
-    <script type="text/javascript" src="js/shCore.js"></script>
-    <script type="text/javascript" src="js/shBrushClojure.js"></script>
-    <script type="text/javascript" src="js/shBrushJava.js"></script>
-    <script type="text/javascript" src="js/shBrushJScript.js"></script>
-    <script type="text/javascript"> 
-	SyntaxHighlighter.defaults['gutter'] = false;
-	SyntaxHighlighter.defaults['smart-tabs'] = false;
-	SyntaxHighlighter.defaults['toolbar'] = false;
-	SyntaxHighlighter.all();
-	</script>
-    </body>
-  </html>
+   </div>
+   <script type="text/javascript" src="js/jquery.min.js"></script>
+   <script type="text/javascript" src="js/kerning.js"></script>
+   <script src="js/impress.js"></script>
+   <script>impress();</script>
+   <script type="text/javascript" src="js/shCore.js"></script>
+   <script type="text/javascript" src="js/shBrushClojure.js"></script>
+   <script type="text/javascript" src="js/shBrushJava.js"></script>
+  <script type="text/javascript" src="js/shBrushDrools.js"></script>
+   <script type="text/javascript" src="js/shBrushJScript.js"></script>
+   <script type="text/javascript"> 
+     SyntaxHighlighter.defaults['gutter'] = false;
+     SyntaxHighlighter.defaults['smart-tabs'] = false;
+     SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all();
+     </script>
+   </body>
+ </html>
 
 
 

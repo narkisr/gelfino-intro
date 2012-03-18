@@ -69,6 +69,30 @@ div#asymp{
     -webkit-transition-delay: 4s;
 }
 
+#mission div{
+    display: inline-block;
+    -webkit-transition: 0.5s;
+    transition:         0.5s;
+}
+
+
+#gelfino div{
+    display: inline-block;
+    -webkit-transition: 0.5s;
+    transition:         0.5s;
+}
+
+#gelfino.active .rotating {
+    -webkit-transform: rotate(360deg);
+    -webkit-transition-delay: 3.05s;
+}
+
+
+#gelfino.active .shrinking{
+    -webkit-transform: scale(0.6);
+    -webkit-transition-delay: 2s;
+}
+
 /*how visible backround objects are*/
 .step:not(.active) {
     opacity: 0.1;
