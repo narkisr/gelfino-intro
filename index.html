@@ -63,7 +63,7 @@
 	</div>
 
 
-	<div id="code GELF" class="step" data-x="-1500" data-y="400" data-z="-1400"> 
+	<div id="code GELF" class="step" data-x="-1500" data-y="800"> 
 	   <pre class="brush: javascript;">
 {
   "version": "1.0",
@@ -82,7 +82,7 @@
 	</div>
 
 
-     <div id="code defstream" class="step" data-x="-1500" data-y="700" data-z="-1200"> 
+     <div id="code defstream" class="step" data-x="-1500" data-y="1100"> 
 	 <pre class="brush: clojure;">
 (defstream stream-name 
   "Selectors can be a string regex or fn"
@@ -90,7 +90,7 @@
 	 </pre>
 	</div>
 
-     <div id="code examples" class="step" data-x="-1500" data-y="900" data-z="-1000"> 
+     <div id="code examples" class="step" data-x="-1500" data-y="1350"> 
        <pre class="brush: clojure;">
 (defstream unicorns
    :short_message #".*unicorn.*" 
@@ -103,68 +103,101 @@
 	 </pre>
      </div>
 
+  <div id="fnordmetrics-demo" class="step " data-x="-1500" data-y="1600" > 
+    <h1> Metrics DEMO! </h1>
+  </div>
 
-    <div id="code drools-stream" class="step" data-x="-1500" data-y="1100" data-z="-800"> 
-       <pre class="brush: clojure;">
-(defstream unicorns :drools "unicorns.drl")
-	 </pre>
-     </div>
 
-  <div id="code drools-rules" class="step" data-x="-1500" data-y="1300" data-z="-600"> 
+   <div id="drools-intro" class="step" data-x="-1500" data-y="1800">  
+     <img  src="img/drools-logo.png" /> 
+   </div>
+
+
+  <div id="code drl" class="step" data-x="-1500" data-y="2000"> 
 	 <pre class="brush: drools;">
-    rule "unicorn seen"
-    when 
-        e: String(this matches ".*unicorn.*")
-    then
-       System.out.println("unicorn seen");   
-    end 
+rule "unicorn seen"
+when 
+ e: String(this matches ".*unicorn.*") 
+ from entry-point event-stream
+then
+  System.out.println("unicorn seen");   
+end 
     </pre>
   </div>
 
-     <div id="summary" class="step title" data-x="4800" data-y="4800" data-rotate="0" data-scale="2"> 
-	 <b>Summary</b>
-     </div>
+
+  <div id="code drools-dsl" class="step" data-x="-1500" data-y="2300"> 
+	 <pre class="brush: clojure;">
+(def-rulestream infos
+  (rule info-messages
+    (when message :of-type Message   
+       (== level "INFO") :from "event-stream")
+    (then (println "Rule 1"))))
+	   </pre>
+  </div>
+
+  <div id="code 4-in-a-row" class="step" data-x="-1500" data-y="2600"> 
+	 <pre class="brush: drools;">
+rule "4-in-a-row" 
+when
+ Number(intValue > 3) 
+ from 
+ accumulate(
+  $message:Message(level=="ERROR")
+  over window:time(1m) 
+  from entry-point entryone, count($message))
+then
+  alert("4 errors in 1min timeframe!")
+end
+    </pre>
+  </div>
 
 
-     <div id="links" class="step" data-x="4800" data-y="5200" data-rotate="0" data-scale="1" > 
-	 <h1>Resources</h1>
-	 <a href="https://github.com/narkisr/gelfino">gelfino</a>
-	 <a href="http://graylog2.com/">graylog2</a>
-	 <a href="http://logstash.net/">logstash</a>
-     </div>
 
-     <div id="resource" class="step" data-x="4800" data-y="5500" data-rotate="0" data-scale="1" > 
-	 <div class="content bullets" ref="summary/01-about/2" style="margin-top: 128.5px; ">
-	   <h1>Find me online</h1>
+  <div id="summary" class="step title" data-x="4800" data-y="4800" data-rotate="0" data-scale="2"> 
+    <b>Summary</b>
+  </div>
 
-	   <a href="http://il.linkedin.com/in/narkisr" >linkedin</a> 
-	   <a href="http://twitter.com/#!/narkisr/">@narkisr</a><br>
-	   <a href="https://github.com/narkisr">github</a> 
-	   <a href="http://narkisr.com">narkisr.com</a>
 
-	 </div>
-     </div>
+  <div id="links" class="step" data-x="4800" data-y="5200" data-rotate="0" data-scale="1" > 
+    <h1>Resources</h1>
+    <a href="https://github.com/narkisr/gelfino">gelfino</a>
+    <a href="http://graylog2.com/">graylog2</a>
+    <a href="http://logstash.net/">logstash</a>
+  </div>
 
-     <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
-     </div> 
+  <div id="resource" class="step" data-x="4800" data-y="5500" data-rotate="0" data-scale="1" > 
+    <div class="content bullets" ref="summary/01-about/2" style="margin-top: 128.5px; ">
+	<h1>Find me online</h1>
 
-   </div>
-   <script type="text/javascript" src="js/jquery.min.js"></script>
-   <script type="text/javascript" src="js/kerning.js"></script>
-   <script src="js/impress.js"></script>
-   <script>impress();</script>
-   <script type="text/javascript" src="js/shCore.js"></script>
-   <script type="text/javascript" src="js/shBrushClojure.js"></script>
-   <script type="text/javascript" src="js/shBrushJava.js"></script>
-  <script type="text/javascript" src="js/shBrushDrools.js"></script>
-   <script type="text/javascript" src="js/shBrushJScript.js"></script>
-   <script type="text/javascript"> 
-     SyntaxHighlighter.defaults['gutter'] = false;
-     SyntaxHighlighter.defaults['smart-tabs'] = false;
-     SyntaxHighlighter.defaults['toolbar'] = false;
-     SyntaxHighlighter.all();
-     </script>
-   </body>
+	<a href="http://il.linkedin.com/in/narkisr" >linkedin</a> 
+	<a href="http://twitter.com/#!/narkisr/">@narkisr</a><br>
+	<a href="https://github.com/narkisr">github</a> 
+	<a href="http://narkisr.com">narkisr.com</a>
+
+    </div>
+  </div>
+
+  <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+  </div> 
+
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/kerning.js"></script>
+<script src="js/impress.js"></script>
+<script>impress();</script>
+<script type="text/javascript" src="js/shCore.js"></script>
+<script type="text/javascript" src="js/shBrushClojure.js"></script>
+<script type="text/javascript" src="js/shBrushJava.js"></script>
+<script type="text/javascript" src="js/shBrushDrools.js"></script>
+<script type="text/javascript" src="js/shBrushJScript.js"></script>
+<script type="text/javascript"> 
+  SyntaxHighlighter.defaults['gutter'] = false;
+  SyntaxHighlighter.defaults['smart-tabs'] = false;
+  SyntaxHighlighter.defaults['toolbar'] = false;
+  SyntaxHighlighter.all();
+  </script>
+</body>
  </html>
 
 
