@@ -1,6 +1,6 @@
 # Gelfino introduction
 
-A lightning talk about the gelfino project, can be view [here](http://narkisr.github.com/gelfino-intro/#title)
+A lightning talk about the gelfino project, can be viewed [here](http://narkisr.github.com/gelfino-intro/#title)
 
 # License
 
