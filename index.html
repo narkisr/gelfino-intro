@@ -103,8 +103,8 @@
 	 </pre>
      </div>
 
-  <div id="fnordmetrics-demo" class="step " data-x="-1500" data-y="1600" > 
-    <h1> Metrics DEMO! </h1>
+  <div id="fnordmetrics-demo" class="step" data-x="-1500" data-y="1600" > 
+    <h1><a href="http://vimeo.com/40190962"> Metrics DEMO! </a></h1>
   </div>
 
 
@@ -137,20 +137,38 @@ end
   </div>
 
   <div id="code 4-in-a-row" class="step" data-x="-1500" data-y="2600"> 
-	 <pre class="brush: drools;">
-rule "4-in-a-row" 
-when
- Number(intValue > 3) 
- from 
- accumulate(
-  $message:Message(level=="ERROR")
-  over window:time(1m) 
-  from entry-point entryone, count($message))
-then
-  alert("4 errors in 1min timeframe!")
-end
-    </pre>
+<pre class="brush: clojure;">
+(defrule four-errors
+ (when Number (> intValue 3) :from
+  (accumulate $m :> Message (== level 4) 
+  :over (window :time 1 m)
+  :from (entry-point event-stream) (count $m)))
+  (then (info "4 erros happend in 1 min")))
+</pre>
   </div>
+
+ 
+  <div id="storm-title" class="step" data-x="-1500" data-y="2800" > 
+      <div id="container">
+	    <div>
+	     <img src="img/bolt.png" /> 
+	    </div>
+	    <div style="position: absolute; left: 140px; top: 40px;">
+		<h1>Storm</h1>
+	    </div>
+	    <div style="position: absolute; left: 320px; top: 40px;">
+	     <img src="img/bolt.png" /> 
+	    </div>
+	  </div>
+</div>
+
+  <div id="strom-architecture" class="step" data-x="-1500" data-y="3100">  
+    <img  src="img/storm-topology.png" /> 
+  </div>
+
+ <div id="storm-demo" class="step" data-x="-1500" data-y="3400" > 
+    <h1><a href="https://vimeo.com/51372581"> Storm DEMO! </a></h1>
+ </div>
 
 
 
@@ -175,16 +193,12 @@ end
 	<a href="https://github.com/narkisr">github</a> 
 	<a href="http://narkisr.com">narkisr.com</a>
 	<a href="http://www.lambda.org.il/">Sayeret-Lambda</a>
-
     </div>
   </div>
 
   <div id="Lambda" class="step" data-x="4800" data-y="5800" data-rotate="0" data-scale="1" > 
     <div class="content bullets" ref="summary/01-about/2" style="margin-top: 128.5px; ">
 	<h1>Join us: <a href="http://www.lambda.org.il/">Sayeret-Lambda</a></h1>
-
-	
-
     </div>
   </div>
 
